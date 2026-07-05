@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "Admin Panel",
-  description: "Food Delivery Admin Dashboard",
+  description: "Food delivery admin dashboard",
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-100">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
