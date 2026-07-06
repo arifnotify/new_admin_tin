@@ -1,79 +1,125 @@
 "use client";
 
-import { CheckCircle,  Truck, Package } from "lucide-react";
+import {
+  CheckCircle2,
+  ChefHat,
+  Bike,
+  PackageCheck,
+} from "lucide-react";
 
-const steps = [
+const timeline = [
   {
+    id: 1,
     title: "Order Placed",
-    desc: "Customer placed the order",
-    icon: CheckCircle,
-    active: true,
+    time: "10:15 AM",
+    completed: true,
+    icon: CheckCircle2,
+    color: "text-green-600",
+    bg: "bg-green-100",
   },
   {
+    id: 2,
     title: "Preparing Food",
-    desc: "Restaurant is cooking",
-    icon: Package,
-    active: true,
+    time: "10:22 AM",
+    completed: true,
+    icon: ChefHat,
+    color: "text-orange-500",
+    bg: "bg-orange-100",
   },
   {
-    title: "On the Way",
-    desc: "Rider picked up order",
-    icon: Truck,
-    active: false,
+    id: 3,
+    title: "Rider Picked Up",
+    time: "10:40 AM",
+    completed: true,
+    icon: Bike,
+    color: "text-blue-600",
+    bg: "bg-blue-100",
   },
   {
+    id: 4,
     title: "Delivered",
-    desc: "Order completed",
-    icon: CheckCircle,
-    active: false,
+    time: "Estimated 11:05 AM",
+    completed: false,
+    icon: PackageCheck,
+    color: "text-gray-400",
+    bg: "bg-gray-100",
   },
 ];
 
 export default function OrderTimeline() {
   return (
-    <div className="bg-white rounded-xl border shadow-sm p-5">
-      
-      <h2 className="text-lg font-semibold text-gray-800 mb-5">
-        Order Timeline
-      </h2>
+    <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
 
-      <div className="space-y-6 relative">
+      {/* Header */}
+      <div className="px-5 py-4 border-b">
+        <h2 className="text-lg font-semibold text-gray-800">
+          Order Timeline
+        </h2>
+      </div>
 
-        {/* vertical line */}
-        <div className="absolute left-3 top-2 bottom-2 w-[2px] bg-gray-100" />
+      {/* Timeline */}
+      <div className="p-5">
 
-        {steps.map((step, i) => {
-          const Icon = step.icon;
+        <div className="relative">
 
-          return (
-            <div key={i} className="flex items-start gap-3 relative">
+          {timeline.map((step, index) => {
+            const Icon = step.icon;
 
-              {/* ICON */}
+            return (
               <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center z-10
-                ${step.active ? "bg-pink-600 text-white" : "bg-gray-200 text-gray-500"}`}
+                key={step.id}
+                className="relative flex gap-4 pb-8 last:pb-0"
               >
-                <Icon size={14} />
-              </div>
 
-              {/* CONTENT */}
-              <div>
-                <p
-                  className={`text-sm font-medium ${
-                    step.active ? "text-gray-800" : "text-gray-400"
-                  }`}
+                {/* Vertical Line */}
+                {index !== timeline.length - 1 && (
+                  <div className="absolute left-5 top-12 w-[2px] h-full bg-gray-200"></div>
+                )}
+
+                {/* Icon */}
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${step.bg}`}
                 >
-                  {step.title}
-                </p>
+                  <Icon
+                    size={18}
+                    className={step.color}
+                  />
+                </div>
 
-                <p className="text-xs text-gray-400">
-                  {step.desc}
-                </p>
+                {/* Content */}
+                <div className="flex-1">
+
+                  <div className="flex justify-between">
+
+                    <h3 className="font-medium text-gray-800">
+                      {step.title}
+                    </h3>
+
+                    <span className="text-xs text-gray-400">
+                      {step.time}
+                    </span>
+
+                  </div>
+
+                  <p
+                    className={`text-sm mt-1 ${
+                      step.completed
+                        ? "text-green-600"
+                        : "text-gray-400"
+                    }`}
+                  >
+                    {step.completed
+                      ? "Completed"
+                      : "Waiting"}
+                  </p>
+
+                </div>
+
               </div>
+            );
+          })}
 
-            </div>
-          );
-        })}
+        </div>
 
       </div>
     </div>
